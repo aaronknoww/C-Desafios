@@ -14,19 +14,26 @@ class Solution
 {
     private:
 
-    void backFoward(vector<int> &arr, bool res, int ini, int end, int &lenChamp)
+    void backFoward(vector<int> &arr, int ini, int end, int &lenChamp)
     {
-        int lenAct = 0;
+        bool res = true;
+        int elem = end - ini;
         int lenTemp = 0;
-        while (ini < end && (end - ini) > lenChamp )
+        int iter = 0;
+        while (ini <= elem && lenChamp + iter < elem )
         {
-            res = (arr[ini] < 0) ? !res : res; //TODO: REVISAR QUE SI NIEGUE EL VALOR.
-            lenTemp++;
+            for (int i = 0; arr[i+ini] !=0; i++)
+            {
+                res = (arr[i+ini] < 0) ? !res : res; 
+                lenTemp++;
+                if(res && lenChamp < lenTemp)
+                    lenChamp = lenTemp; 
+            }
             ini++;
-            if(res && lenChamp < lenTemp)
-                lenChamp = lenTemp;            
-        }
-        
+            lenTemp = 0;
+            res = true;
+            iter++;                        
+        }        
     }
     
     public:
@@ -54,7 +61,7 @@ class Solution
                         }
                         else
                         {
-                            backFoward(arr, res, ini, i, lenChamp);
+                            backFoward(arr, ini + 1, i, lenChamp);
                             res = true;
                             lenTemp = 0;
                             ini =  i + 1;
@@ -101,10 +108,37 @@ int main() {
 
 
 /*
+1
+5
+0 -9 5 0 -6
+
+r = 1;
+
+1
+8
+9 -1 8 6 0 8 -2 3
+r = 2;
+
+1
+6
+0 -7 4 6 0 4
+r=2;
+
+1
+5
+-1 2 3 4 5
+r=4;
+
+1
+5
+-7 1 0 -7 0
+r=1;
 
 1
 8
 -8 9 5 -7 -5 3 0 4
+r=5;
+
 1
 5
 1 -2 3 -4 -1
