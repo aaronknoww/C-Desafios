@@ -20,7 +20,7 @@ class Solution
         int elem = end - ini;
         int lenTemp = 0;
         int iter = 0;
-        while (ini <= elem && lenChamp + iter < elem )
+        while (arr[ini] != 0 && lenChamp + iter < elem )
         {
             for (int i = 0; arr[i+ini] !=0; i++)
             {
