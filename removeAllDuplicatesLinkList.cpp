@@ -1,6 +1,8 @@
 //{ Driver Code Starts
 // Initial Template for C++
 
+//TERMINADO Y PASO LOS 155 GFG
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -30,19 +32,7 @@ struct Node {
 
 class Solution
 {
-    private:
-    void moveHead(Node *& head)
-    {
-        while ( head->next->data == head->data ) // to erase all duplica from the begining.
-      {
-            head =  head->next;
-            if(head == nullptr)
-                  return;
-
-      }
-      head =  head->next;
-
-    }
+  
   public:
     Node* removeAllDuplicates(struct Node* head)
     {
@@ -50,7 +40,7 @@ class Solution
             return head;
 
         
-        while(head->next->data == head->data)
+        while((head->next) && head->next->data == head->data)
         {
             while (head->next->data == head->data) // to erase all duplica from the begining.
             {
@@ -70,13 +60,14 @@ class Solution
         while (second)
         {
             
-            while(second->next->data && second->data == second->next->data)
+            while( (second->next != nullptr) && (second->data == second->next->data) )
             {
                 enter = true;
-                while (second->next->data && second->data == second->next->data)
+                
+                while (second->next->data && (second->data == second->next->data) )
                 {
                     second = second->next;
-                    if (second == nullptr)
+                    if (second == nullptr || second->next == nullptr)
                     {
                         first->next = nullptr;
                         return head;
@@ -84,18 +75,18 @@ class Solution
                     
                 }
                 second = (second) ? second->next : second;
-                
                 if(second == nullptr)
                 {
                     first->next = nullptr;
                     return head;
                 }         
-
+                
             }
             if(enter)
             {
                 first->next = second;
                 first = second;
+                second = second->next;
             }
             else
             {
@@ -127,6 +118,18 @@ void printList(struct Node *head) {
 1
 8
 23 28 28 35 49 49 53 53
+
+1
+4
+1 2 3 4
+
+1
+5
+1 1 2 3 3
+
+1
+5
+5 1 1 2 2
 */
 // Driver program to test above functions
 int main() {
